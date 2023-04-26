@@ -1,11 +1,17 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
 const middleware = require("./middleware");
+const mongoose = require("mongoose");
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(middleware.errorHandler);
+
+mongoose
+  .connect(process.env.MONGOURL)
+  .then(console.log("⚡DB: Connected"))
+  .catch((err) => console.log(err));
 
 // Home
 app.get("/", (req, res) => {
@@ -13,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/task", require("./routes/tasks"));
+app.use("/tasks", require("./routes/tasks"));
 
 
 // Server render
