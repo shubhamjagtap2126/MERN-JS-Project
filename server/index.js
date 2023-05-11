@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(middleware.errorHandler);
 
 mongoose
@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/tasks", require("./routes/tasks"));
-
+app.use("/api/tasks", require("./routes/taskRoute"));
+app.use("/api/users", require("./routes/userRoute"));
 
 // Server render
 const port = process.env.PORT;

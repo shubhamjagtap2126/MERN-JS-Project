@@ -1,12 +1,13 @@
 const express = require("express");
-const taskcontrols = require("../controllers/tasks");
+const taskcontrols = require("../controllers/taskController");
+// const { authUser } = require("../middleware");
 
 const router = express.Router();
 
 router.route("/").get(taskcontrols.getTasks).post(taskcontrols.setTasks);
 
 router
-  .route("/:id")
+  .route("/:_id")
   .get(taskcontrols.getIndTask)
   .put(taskcontrols.putIndTask)
   .patch(taskcontrols.patchIndTask)
