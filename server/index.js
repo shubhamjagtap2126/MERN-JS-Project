@@ -2,11 +2,13 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const middleware = require("./middleware");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(middleware.errorHandler);
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGOURL)
@@ -21,6 +23,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/tasks", require("./routes/taskRoute"));
 app.use("/api/users", require("./routes/userRoute"));
+app.use("/api/posts", require("./routes/postsRoute"));
 
 // Server render
 const port = process.env.PORT;

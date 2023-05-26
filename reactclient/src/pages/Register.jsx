@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { PGTitle } from "./Home";
 
 const Register = () => {
-  const [email, setemail] = useState();
-  const [password, setpassword] = useState();
-  const [name, setName] = useState();
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = formData;
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,14 +40,12 @@ const Register = () => {
         console.log(data);
         setisLoading(false);
       })
-      .catch((e) => console.log(e.msg));
+      .catch((e) => console.log(e.error));
   };
 
   return (
     <>
-      <Helmet>
-        <title>Register</title>
-      </Helmet>
+      <PGTitle title="Register" />
       <div className="card container mt-5">
         <img
           className="card-img-left ml-0"
@@ -45,36 +53,39 @@ const Register = () => {
         />
         <div className="card-body">
           <form className="container" onSubmit={handleSubmit}>
-            <div classNameName="form-row">
+            <div className="form-row">
               <div className="form-group">
-                <label for="inputEmail4">Email</label>
+                <label>Email</label>
                 <input
                   type="email"
+                  name="email"
                   className="form-control"
                   id="inputEmail4"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setemail(e.target.value)}
+                  onChange={onChange}
                 />
                 <div className="form-group">
-                  <label for="inputPassword4">Password</label>
+                  <label>Password</label>
                   <input
                     type="password"
+                    name="password"
                     className="form-control"
                     id="inputPassword4"
                     placeholder="Password"
                     value={password}
-                    onChange={(e) => setpassword(e.target.value)}
+                    onChange={onChange}
                   />
 
-                  <label for="name form-lable">Name</label>
+                  <label className="form-lable">Name</label>
                   <input
                     type="text"
+                    name="name"
                     className="form-control"
                     id="name"
                     placeholder="Name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={onChange}
                   />
                 </div>
               </div>
@@ -119,7 +130,8 @@ const Register = () => {
             </div> */}
             <button className="btn btn-primary">SignUp</button>
             <div>
-              <a to="register">Already signUp. Try Login</a>
+              Already signUp.
+              <Link to="/Login">Try Login</Link>
             </div>
           </form>
         </div>

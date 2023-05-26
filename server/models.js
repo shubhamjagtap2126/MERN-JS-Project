@@ -1,5 +1,75 @@
 const mongoose = require("mongoose");
 
+//
+const postSchema = mongoose.Schema(
+  {
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+  },
+  { timestamps: true }
+);
+
+//
+const commentSchema = mongoose.Schema(
+  {
+    postId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    replies: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Reply",
+      },
+    ],
+  },
+  { timestamps: true }
+);
+
+//
+const replySchema = mongoose.Schema(
+  {
+    commentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+      required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+//
 const taskSchema = mongoose.Schema(
   {
     task: { type: String, required: [true, "required"] },
@@ -14,6 +84,7 @@ const taskSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+//
 const userSchema = mongoose.Schema(
   {
     name: { type: String, required: [true, "required"] },
@@ -29,4 +100,7 @@ const userSchema = mongoose.Schema(
 module.exports = {
   Task: mongoose.model("Task", taskSchema),
   User: mongoose.model("User", userSchema),
+  Post: mongoose.model("Post", postSchema),
+  Comment: mongoose.model("Comment", commentSchema),
+  Reply: mongoose.model("Reply", replySchema),
 };

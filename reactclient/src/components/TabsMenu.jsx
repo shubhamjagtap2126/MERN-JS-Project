@@ -1,54 +1,48 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 
-const TabsMenu = () => {
-  const location = useLocation();
-  // console.log(location);
+export function TabsMenu() {
   return (
     <>
-      <div classNameName="nav" id="myTab" role="tablist">
+      <div className="nav" id="myTab" role="tablist">
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink className="nav-link" to="posts/sd">
-              Active
-            </NavLink>
+            <NavLink to="posts/sd">Active</NavLink>
           </li>
           <li className="nav-item dropdown">
-            <a
+            <Link
               className="nav-link dropdown-toggle"
               data-toggle="dropdown"
-              href="#"
+              to="#"
               role="button"
               aria-haspopup="true"
               aria-expanded="false"
             >
               Dropdown
-            </a>
+            </Link>
             <div className="dropdown-menu">
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="#">
                 Action
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="#">
                 Another action
-              </a>
-              <a className="dropdown-item" href="#">
+              </Link>
+              <Link className="dropdown-item" to="#">
                 Something else here
-              </a>
+              </Link>
               <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="#">
                 Separated link
-              </a>
+              </Link>
             </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <Link className="nav-link" to="#">
               Link
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
       <Outlet />
     </>
   );
-};
-
-export default TabsMenu;
+}

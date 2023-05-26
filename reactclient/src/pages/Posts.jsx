@@ -1,104 +1,163 @@
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useState, useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useFetch } from "../Hooks";
+import { PGTitle } from "./Home";
 
-const usePostsAPI = () => {
-  const [posts, setPosts] = useState();
-  const [comments, setComments] = useState();
-
-  useEffect(() => {
-    // Fetch all posts
-    const fetchPosts = async () => {
-      const response = await fetch("/api/posts");
-      const data = await response.json();
-      setPosts(data);
-    };
-
-    // Fetch all comments
-    const fetchComments = async () => {
-      const response = await fetch("/api/comments");
-      const data = await response.json();
-      setComments(data);
-    };
-
-    fetchPosts();
-    fetchComments();
-  }, []);
-
-  const createPost = async (postData) => {
-    // Create a new post
-    const response = await fetch("/api/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    });
-    const newPost = await response.json();
-    setPosts([...posts, newPost]);
-  };
-
-  const updatePost = async (postId, postData) => {
-    // Update an existing post
-    const response = await fetch(`/api/posts/${postId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    });
-    const updatedPost = await response.json();
-    setPosts(posts.map((post) => (post.id === postId ? updatedPost : post)));
-  };
-
-  const deletePost = async (postId) => {
-    // Delete an existing post
-    await fetch(`/api/posts/${postId}`, { method: "DELETE" });
-    setPosts(posts.filter((post) => post.id !== postId));
-  };
-
-  const createComment = async (commentData) => {
-    // Create a new comment
-    const response = await fetch("/api/comments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    });
-    const newComment = await response.json();
-    setComments([...comments, newComment]);
-  };
-
-  const updateComment = async (commentId, commentData) => {
-    // Update an existing comment
-    const response = await fetch(`/api/comments/${commentId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData),
-    });
-    const updatedComment = await response.json();
-    setComments(
-      comments.map((comment) =>
-        comment.id === commentId ? updatedComment : comment
-      )
-    );
-  };
-
-  const deleteComment = async (commentId) => {
-    // Delete an existing comment
-    await fetch(`/api/comments/${commentId}`, { method: "DELETE" });
-    setComments(comments.filter((comment) => comment.id !== commentId));
-  };
-
-  return {
-    posts,
-    createPost,
-    updatePost,
-    deletePost,
-    comments,
-    createComment,
-    updateComment,
-    deleteComment,
-  };
+// Reducer
+export const initialPosts = {
+  posts: [],
+  loading: false,
+  error: false,
 };
+
+export const reducer = (state = initialPosts, action) => {
+  switch (action.type) {
+    case "FETCH_POSTS_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_POSTS_SUCCESS":
+      return { ...state, posts: action.payload, loading: false };
+    case "FETCH_POSTS_FAILURE":
+      return { ...state, error: true, loading: false };
+    case "CREATE_POST_REQUEST":
+      return { ...state, loading: true };
+    case "CREATE_POST_SUCCESS":
+      return { ...state, loading: false };
+    case "CREATE_POST_FAILURE":
+      return { ...state, error: true, loading: false };
+    case "CREATE_COMMENT_REQUEST":
+      return { ...state, loading: true };
+    case "CREATE_COMMENT_SUCCESS":
+      return { ...state, loading: false };
+    case "CREATE_COMMENT_FAILURE":
+      return { ...state, error: true, loading: false };
+    case "CREATE_REPLY_REQUEST":
+      return { ...state, loading: true };
+    case "CREATE_REPLY_SUCCESS":
+      return { ...state, loading: false };
+    case "CREATE_REPLY_FAILURE":
+      return { ...state, error: true, loading: false };
+    default:
+      return state;
+  }
+};
+
+// Actions
+export const fetchPosts = () => async (dispatch) => {
+  dispatch({ type: "FETCH_POSTS_REQUEST" });
+  try {
+    const res = await axios.get("/api/posts");
+    dispatch({ type: "FETCH_POSTS_SUCCESS", payload: res.data });
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: "FETCH_POSTS_FAILURE" });
+  }
+};
+
+export default function Posts() {
+  // State
+  const [posts, setPosts] = useState("");
+  const [comment, setComment] = useState("");
+  const [reply, setReply] = useState("");
+
+  const { loading, data, error } = useFetch("/api/posts");
+  // if (loading) return <h1>Loading....</h1>;
+  // if (error) return <pre>{error}</pre>;
+  // if (data)
+  // Redux
+  // const dispatch = useDispatch();
+  // const posts = useSelector((state) => state.posts);
+  // const [state, dispatch] = useReducer(reducer, { posts: null });
+
+  // Effects
+  // useEffect(() => {
+  //   dispatch(fetchPosts());
+  // }, []);
+  // const posts = [
+  //   { id: 1, content: "hi" },
+  //   { id: 2, content: "Hello" },
+  // ];
+  console.log(data);
+  return (
+    <>
+      <PGTitle title="Posts" />
+      <h1>Posts</h1>
+      {/* Create Posts */}
+      {/* {posts.map((post) => (
+        <p>{post.content}</p>
+      ))} */}
+      {/* Get Posts  */}
+      {/* {posts && posts.map((p, index) => <p className=""> {p}</p>)} */}
+      <div className="card d-flex flex-column col-6 container">
+        <div className="card-body">
+          <div className="d-flex flex-row align-items-start">
+            <div className="p-1">
+              <img
+                src="https://via.placeholder.com/50"
+                alt="User Avatar"
+                className="rounded-circle"
+              />
+            </div>
+            <div className="p-1">
+              <h6 className="mb-0">Post User</h6>
+              <p>2 hours</p>
+            </div>
+          </div>
+          <div className="p-1">
+            <p className="card-text">Post Content</p>
+            <img
+              src="https://via.placeholder.com/100"
+              alt="User Avatar"
+              className="card-img"
+            />
+          </div>
+          <div className="p-1">Likes, comments, views</div>
+          <div className="p-1">Like, comment, share</div>
+        </div>
+        <div className="card-body">
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+              <div className="">
+                <div className="d-flex flex-row align-items-start">
+                  <div className="p-1">
+                    <img
+                      src="https://via.placeholder.com/50"
+                      alt="User Avatar"
+                      className="rounded-circle"
+                    />
+                  </div>
+                  <div className="p-1">
+                    <h6 className="mb-0">Commenter Name</h6>
+                    <p>Comment Content</p>
+                  </div>
+                </div>
+                <div className="p-1">Likes, reply</div>
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  <div>
+                    <div className="d-flex flex-row align-items-start">
+                      <div className="p-1">
+                        <img
+                          src="https://via.placeholder.com/50"
+                          alt="User Avatar"
+                          className="rounded-circle"
+                        />
+                      </div>
+                      <div className="p-1">
+                        <h6 className="mb-0">Replier Name</h6>
+                        <p>Reply Content</p>
+                      </div>
+                    </div>
+                    <div className="p-1">Likes, reply</div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
+  );
+}

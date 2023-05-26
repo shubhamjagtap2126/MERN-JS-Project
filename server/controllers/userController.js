@@ -7,7 +7,10 @@ const { User } = require("../models");
 //
 module.exports.getUser = asyncHandler(async (req, res) => {
   // res.status(200).json("get route")
-  const user = await User.find().select("-password");
+  // console.log(req.user._id.toString());
+  const user = await User.find({ _id: req.user._id.toString() }).select(
+    "-password"
+  );
   res.status(200).json(user);
 });
 
@@ -26,12 +29,12 @@ module.exports.signupUser = asyncHandler(async (req, res) => {
     }) ||
     !validator.isEmail(email)
   ) {
-    res.status(400).json({ msg: "Please check the details" });
+    res.status(400).json({ error: "Please check the details" });
   }
   // check user exist
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400).json({ msg: "user exist" });
+    res.status(400).json({ error: "user exist" });
   }
   // Hash Password
   const salt = await bcryptjs.genSalt(10);
@@ -42,7 +45,7 @@ module.exports.signupUser = asyncHandler(async (req, res) => {
   if (user) {
     res.status(201).json({ user, token: jwtToken(user._id) });
   } else {
-    res.status(400).json({ msg: "Invalid User" });
+    res.status(400).json({ error: "Invalid User" });
   }
 });
 
@@ -50,28 +53,28 @@ module.exports.signupUser = asyncHandler(async (req, res) => {
 module.exports.loginUser = asyncHandler(async (req, res) => {
   const { password, email } = req.body;
   if (!password || !email) {
-    res.status(400).json({ msg: "Please add details" });
+    res.status(400).json({ error: "Please add details" });
   }
   // check user exist
-  const userExists = await User.findOne({ email });
+  const user = await User.findOne({ email });
   // userExists({ token: jwtToken(userExists._id) });
   // console.log(userExists);
-  if (userExists && (await bcryptjs.compare(password, userExists.password))) {
-    res.status(201).json({ userExists, token: jwtToken(userExists._id) });
+  if (user && (await bcryptjs.compare(password, user.password))) {
+    res.status(201).json({ user, token: jwtToken(user._id) });
   }
-  res.status(400).json({ msg: "Signup now" });
+  res.status(400).json({ error: "Signup now" });
 });
 
 //
 module.exports.logoutUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ msg: "logout route" });
+  res.status(200).json({ message: "logout Successful!" });
 });
 
 //
-module.exports.frgpswUser = asyncHandler(async (req, res) => {
+module.exports.resetpassword = asyncHandler(async (req, res) => {
   const { password, pwd2, email } = req.body;
   if (!password || !pwd2 || !email) {
-    res.status(400).json({ msg: "Please add details" });
+    res.status(400).json({ error: "Please add details" });
   }
   // check user exist
   const userExists = await User.findOne({ email });

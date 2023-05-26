@@ -15,3 +15,7 @@ code {
 .card {
   flex-direction: row;
 }
+.footer {
+  padding-top: 3em;
+  margin-top: auto;
+}

@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, useState } from "react";
+import { Navigate, redirect } from "react-router-dom";
+import { PGTitle } from "./Home";
 
 export default function Login() {
   const [email, setemail] = useState("");
@@ -9,65 +9,62 @@ export default function Login() {
   const [error, setError] = useState("");
   // const [isAuthUser, setisAuthUser] = useState(false);
 
-  // useEffect(() => {
-  //   function isAuthUser() {
-  //     if (!localStorage.getItem("token")) {
-  //       console.log(localStorage.getItem("token"));
-  //       return true;
-  //     }
-  //     return false;
-  //   }
-  // }, [isAuthUser]);
+  useEffect(() => {
+    function isAuthUser() {
+      if (!localStorage.getItem("token")) {
+        console.log(localStorage.getItem("token"));
+        return true;
+      }
+      return false;
+    }
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // const data = { email, password };
     setisLoading(true);
     console.log({ email, password });
 
-    // const reqOptions = {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // };
-
     try {
-      const token = localStorage.getItem("token");
-      console.log(token);
-      axios
-        .post(
-          "api/users/login",
-          { email, password }
-          // { headers: { Authorization: `Bearer ${token}` } }
-        )
-        .then((res) => {
-          return res.json();
-          //   // console.log(res.json());
-        });
-      // .then((data) => {
-      //   console.log(data);
-      //   setisLoading(false);
-      //   // return data;
-      //   // alert("Login  Successfully");
-      // })
+      const response = await fetch("/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await response.json();
+
+      if (!response.ok) {
+        setisLoading(false);
+        setError(json.error);
+      }
+      if (response.ok) {
+        // save the user to local storage
+        localStorage.setItem("user", JSON.stringify(json));
+        // update the auth context
+        // const dispatch = useDispatch();
+        // dispatch({ type: "LOGIN", payload: json });
+        // update loading state
+        setisLoading(false);
+      }
+      if (localStorage.getItem) {
+        Navigate("/");
+      }
+      return { isLoading, error };
     } catch (error) {
-      console.log(error.msg);
-      setError(error.msg);
+      // console.log(error.error);
+      setError(error.error);
     }
   };
 
   return (
     <>
-      <Helmet>
-        <title>Login</title>
-      </Helmet>
+      <PGTitle title="Login" />
       {/* <div>Login</div> */}
-      <div className="card col-sm-3 mt-5 offset-md-4">
+      <div className="card col-md-8 col-lg-6 my-5">
         <div className="card-body">
           <form className="container mt-5 mb-5" onSubmit={handleSubmit}>
             <label className="form-lable">Email</label>
             <input
-              exact
               className="form-control"
               type="email"
               id="email"
@@ -78,7 +75,6 @@ export default function Login() {
             {/* {email} */}
             <label className="form-lable">Password</label>
             <input
-              exact
               className="form-control"
               type="password"
               id="password"
