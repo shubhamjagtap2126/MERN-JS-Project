@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 app.use("/api/tasks", require("./routes/taskRoute"));
 app.use("/api/users", require("./routes/userRoute"));
 app.use("/api/posts", require("./routes/postsRoute"));
+app.use("/api/budget", require("./routes/budgetExpenseRoute"));
 
 // Server render
 const port = process.env.PORT;

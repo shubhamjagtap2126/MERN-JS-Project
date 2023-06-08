@@ -1,27 +1,73 @@
 const mongoose = require("mongoose");
 
-//
-const postSchema = mongoose.Schema(
+// =========> Schema = Budget <=========
+const budgetSchema = mongoose.Schema(
   {
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
-    content: {
+    category: {
       type: String,
       required: true,
     },
-    comments: [
+    budgetAmount: {
+      type: Number,
+      required: true,
+    },
+    expenses: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "Expense",
       },
+    ],
+    isActive: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+// =========> Schema = Expense <=========
+const expenseSchema = mongoose.Schema(
+  {
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    expense: {
+      type: String,
+      required: true,
+    },
+    expenseAmount: {
+      type: Number,
+      required: true,
+    },
+    budget: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Budget",
+      },
+    ],
+    isActive: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+
+// =========> Schema = Posts <=========
+const postSchema = mongoose.Schema(
+  {
+    user_id: { type: mongoose.Schema.Types.ObjectId,  ref: "User", required: true },
+    content: { type: String, required: true },
+    comments: [
+      {type: mongoose.Schema.Types.ObjectId, ref: "Comment"},
     ],
   },
   { timestamps: true }
 );
 
-//
+// =========> Schema = PostsComments <=========
 const commentSchema = mongoose.Schema(
   {
     postId: {
@@ -48,7 +94,7 @@ const commentSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-//
+// =========> Schema = PostsCommentsReply <=========
 const replySchema = mongoose.Schema(
   {
     commentId: {
@@ -69,7 +115,7 @@ const replySchema = mongoose.Schema(
   { timestamps: true }
 );
 
-//
+// =========> Schema = Tasks <=========
 const taskSchema = mongoose.Schema(
   {
     task: { type: String, required: [true, "required"] },
@@ -84,7 +130,7 @@ const taskSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-//
+// =========> Schema = Users <=========
 const userSchema = mongoose.Schema(
   {
     name: { type: String, required: [true, "required"] },
@@ -103,4 +149,8 @@ module.exports = {
   Post: mongoose.model("Post", postSchema),
   Comment: mongoose.model("Comment", commentSchema),
   Reply: mongoose.model("Reply", replySchema),
+  Budget: mongoose.model("Budget", budgetSchema),
+  Expense: mongoose.model("Expense", expenseSchema),
 };
+
+

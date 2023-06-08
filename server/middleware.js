@@ -28,7 +28,7 @@ module.exports.authUser = asyncHandler(async (req, res, next) => {
       // console.log(valid);
       // get authUser
       req.user = await User.findById(valid.id).select("-password");
-      console.log(req.user);
+      // console.log(req.user);
       next();
     } catch (error) {
       console.log(error);

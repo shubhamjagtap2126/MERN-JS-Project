@@ -1,47 +1,46 @@
-import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider,
-  useLoaderData,
-} from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider, useNavigate, Link } from "react-router-dom";
 
 // =========> Imports = Libraries <=========
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { SiteData } from "./SiteData";
+import { AuthContextProvider } from "./context/AuthContext";
+import { useAuthContext } from "./Hooks";
 
 // Importing elements
-import MainNav from "./components/MainNav";
+import { MakeNavItems } from "./components/MainNav";
+import { userLoader } from "./Helper";
+import Footer from "./components/Footer";
+import ErrorElement from "./components/Error";
 
 // Importing Pages
+import { AuthTab } from "./pages/AuthPage";
 import { Home, About, FAQ } from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Tasks from "./pages/Tasks";
-import { AuthContextProvider } from "./context/AuthContext";
+import { Discover, Prepaid, Recharge, Paybills, Services } from "./pages/Services";
+import { Channel, LearningHome, Gaming, LearningPages, Music, Trending } from "./pages/LearningPages";
+import { ECommerce, Food, ITsepcs, Sports, TrendingECommerce } from "./pages/eCommerce";
+
+// Application Pages
+import { TaskPage } from "./pages/Tasks2";
 import Posts from "./pages/Posts";
-import Footer from "./components/Footer";
-import {
-  Budget,
-  BudgetAction,
-  BudgetExpensesPage,
-  BudgetLoader,
-  Expenses,
-} from "./pages/BudgetExpenses";
-import { Error, userLoader } from "./Helper";
+import { BudgetExpensesPage, BudgetPage, OneBudget } from "./pages/BudgetExpenses";
+import { BudgetServerless, ServiceLoader, ServiceAction } from "./pages/BudgetAppServerless";
 
 // =========> Layout = PageLayout <=========
 export function PageLayout() {
+  const { user } = useAuthContext();
   return (
     <div className="PageLayout">
       <header>
-        <MainNav />
+        <MakeNavItems data={SiteData.PublicMenu} />
+        {/* <BraidCrumbs /> */}
       </header>
 
       <main>
         <Outlet />
       </main>
 
-      <footer className="footer mt-auto">
+      <footer>
         <Footer />
       </footer>
     </div>
@@ -50,13 +49,16 @@ export function PageLayout() {
 
 // =========> Action = LogOut <=========
 export async function LogoutAction() {
-  return localStorage.removeItem("user");
+  localStorage.removeItem("user");
+  const { dispatch } = useAuthContext();
+  dispatch({ type: "LOGOUT" });
+  const navigate = useNavigate();
+  navigate("/");
 }
 
 export const Pricing = () => {
-  const notify = () => toast.info("Wow so easy!", { position: "bottom-left" }); // success, warning, error, default
-
-  const { user } = useLoaderData();
+  const { user } = useAuthContext();
+  const notify = () => toast.info("Wow so easy!"); // success, warning, error, default
   return (
     <div>
       <button className="btn btn-info" onClick={notify}>
@@ -75,41 +77,66 @@ const router = createBrowserRouter([
     element: <PageLayout />,
     children: [
       { index: true, element: <Home /> },
-      // { path: '', element: (<h1>Blog Index</h1>) },
+      {
+        path: "signup",
+        element: <AuthTab />,
+      },
+      {
+        path: "services",
+        element: <Services />,
+
+        children: [
+          { path: "discover", element: <Discover /> },
+          {
+            path: "prepaid",
+            element: <Prepaid />,
+          },
+          { path: "recharge", element: <Recharge /> },
+          { path: "paybills", element: <Paybills /> },
+        ],
+      },
+      {
+        path: "learning",
+        element: <LearningPages />,
+        children: [
+          { path: "home", element: <LearningHome /> },
+          { path: "channel", element: <Channel /> },
+          { path: "trending", element: <Trending /> },
+          { path: "gaming", element: <Gaming /> },
+          { path: "music", element: <Music /> },
+        ],
+      },
+      {
+        path: "ecommerce",
+        element: <ECommerce />,
+        children: [
+          { path: "trending", element: <TrendingECommerce /> },
+          { path: "food", element: <Food /> },
+          { path: "sports", element: <Sports /> },
+          { path: "itspecs", element: <ITsepcs /> },
+        ],
+      },
       {
         path: "about",
         children: [
           { index: true, element: <About /> },
           { path: "team", element: <h1>Team</h1> },
           { path: "vision", element: <h1>Vision</h1> },
+          { path: "pricing", element: <Pricing />, loader: userLoader },
         ],
       },
-
-      {
-        path: "services",
-        element: <h1>Services</h1>,
-      },
-      {
-        path: "pricing",
-        element: <Pricing />,
-        loader: userLoader,
-        errorElement: <Error />,
-      },
-
-      { path: "register", element: <Register /> },
-      { path: "login", element: <Login /> },
       {
         path: "support",
         children: [
           { index: true, element: <h1>Support</h1> },
           { path: "FAQ", element: <FAQ /> },
-          { path: "contact", element: <h1>contact</h1> },
+          { path: "contact", element: <h1>Contact</h1> },
         ],
       },
       {
         path: "tasks",
         children: [
-          { index: true, element: <Tasks /> },
+          { index: true, element: <TaskPage /> },
           // { path: "FAQ", element: FAQ },
         ],
       },
@@ -122,16 +149,11 @@ const router = createBrowserRouter([
       },
       {
         path: "budget",
-        element: <BudgetExpensesPage />,
-        errorElement: <Error />,
+        element: <BudgetPage />,
         children: [
-          {
-            index: true,
-            element: <Budget />,
-            loader: BudgetLoader,
-            action: BudgetAction,
-          },
-          { path: ":id" },
+          { index: true, element: <BudgetExpensesPage /> },
+          { path: "serverless", element: <BudgetServerless />, loader: ServiceLoader, action: ServiceAction, errorElement: <ErrorElement /> },
+          { path: ":budget_id", element: <OneBudget /> },
         ],
       },
       {
@@ -149,12 +171,12 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <AuthContextProvider>
-      <div className="App">
+    <div className="App">
+      <AuthContextProvider>
         <RouterProvider router={router} />
-        <ToastContainer />
-      </div>
-    </AuthContextProvider>
+        <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored" />
+      </AuthContextProvider>
+    </div>
   );
 }
 

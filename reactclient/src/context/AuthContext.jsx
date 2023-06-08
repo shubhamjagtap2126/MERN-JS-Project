@@ -4,6 +4,8 @@ export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       return { user: action.payload };
+    case "SIGNUP":
+      return { user: action.payload };
     case "LOGOUT":
       return { user: null };
     default:
@@ -23,10 +25,11 @@ export const AuthContextProvider = ({ children }) => {
 
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
+      // console.log(user);
     }
   }, []);
 
-  console.log("AuthContext state:", state);
+  // console.log(state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

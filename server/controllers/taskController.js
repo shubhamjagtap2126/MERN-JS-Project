@@ -6,7 +6,10 @@ const mongoose = require("mongoose");
 module.exports.getTasks = asyncHandler(async (req, res) => {
   // { user_id: "644e044838846e2d25544153" }
 
-  const tasks = await Task.find({ user_id: req.user._id.toString() }).sort({
+  const tasks = await Task.find({
+    isActive: false,
+    user_id: req.user._id,
+  }).sort({
     createdAt: -1,
   });
   res.status(200).json(tasks);
@@ -34,7 +37,7 @@ module.exports.getIndTask = asyncHandler(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params._id)) {
     res.status(400).json({ error: "Error: Not Valid task id" });
   }
-  const task = await Task.findById(req.params);
+  const task = await Task.findById({ user_id: req.user._id, isActive: true });
   console.log(task);
   if (!task) {
     res.status(400).json({ error: "Error: No Task Found !!" });
@@ -49,7 +52,7 @@ module.exports.putIndTask = asyncHandler(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params._id)) {
     res.status(400).json({ error: "Error: Not Valid task id" });
   }
-  const task = await Task.findById(req.params);
+  const task = await Task.findById({ user_id: req.user._id, isActive: true });
   if (!task) {
     res.status(400).json({ error: "Error: No Task Found !!" });
   }

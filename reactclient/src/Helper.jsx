@@ -31,31 +31,3 @@ export function userLoader() {
   //   console.log(user);
   return { user };
 }
-
-// =========> Hook = Error <=========
-export const Error = () => {
-  const error = useRouteError();
-  const navigate = useNavigate();
-  return (
-    <div className="error">
-      <div className="card" style={{ width: "18rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">
-            <b>Error</b>
-          </h5>
-          <p>{error.message || error.statusText}</p>
-          <div className="flex-md">
-            <button className="btn btn-dark mx-3" onClick={() => navigate(-1)}>
-              <span>Go Back</span>
-            </button>
-            <Link to="/" className="btn btn-dark mx-3">
-              <span>Go home</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// =========>  =  <=========

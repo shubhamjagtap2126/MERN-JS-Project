@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
-import { PGTitle } from "./Home";
+import { PGTitle } from "../Home";
 
 const Register = () => {
   const [isLoading, setisLoading] = useState(false);

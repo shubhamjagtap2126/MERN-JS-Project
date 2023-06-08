@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 module.exports.getPosts = asyncHandler(async (req, res) => {
   try {
     const posts = await Post.find()
+      .sort({ createdAt: -1 })
       .populate({ path: "comments", populate: ["replies"] })
       .exec();
     res.status(200).json(posts);
@@ -17,7 +18,7 @@ module.exports.getPosts = asyncHandler(async (req, res) => {
 module.exports.getOnePost = asyncHandler(async (req, res) => {
   try {
     // console.log(req.params.postid);
-    const post = await Post.findById(req.params.postid.toString());
+    const post = await Post.findById(req.params.postid).sort({ createdAt: -1 });
     console.log(post);
     res.status(200).json(post);
   } catch (err) {
@@ -49,7 +50,7 @@ module.exports.createPosts = asyncHandler(async (req, res) => {
     // const { content } = req.body;
     const post = await Post.create({
       content: req.body.content,
-      user_id: req.user._id.toString(),
+      user_id: req.user._id,
     });
     console.log(post);
     res.status(200).json({ message: "Post created successfully" });
@@ -62,7 +63,7 @@ module.exports.createPosts = asyncHandler(async (req, res) => {
 module.exports.createComment = asyncHandler(async (req, res) => {
   try {
     // const post = await Post.findById(req.params.postid);
-    // console.log(req.params.postid.toString(), post);
+    // console.log(req.params.postid post);
     const comment = await Comment.create({
       postId: req.params.postid,
       userId: req.user._id,
@@ -71,7 +72,7 @@ module.exports.createComment = asyncHandler(async (req, res) => {
     // console.log(comment);
     // console.log(Post.findById(req.params.postid));
     await Post.findByIdAndUpdate(
-      { _id: req.params.postid.toString() },
+      { _id: req.params.postid },
       { $push: { comments: comment._id } }
     );
     res.status(200).json({ message: "Comment created successfully" });
@@ -89,7 +90,7 @@ module.exports.createReply = asyncHandler(async (req, res) => {
       userId: req.user._id,
       content: req.body.content,
     });
-    await Comment.findByIdAndUpdate(req.params.commentid.toString(), {
+    await Comment.findByIdAndUpdate(commentId, {
       $push: { replies: reply._id },
     });
     res.status(200).json({ message: "Reply created successfully" });
@@ -102,7 +103,7 @@ module.exports.createReply = asyncHandler(async (req, res) => {
 module.exports.updateOnePost = asyncHandler(async (req, res) => {
   try {
     // console.log(req.params.postid);
-    const post = await Post.findById(req.params.postid.toString());
+    const post = await Post.findById(req.params.postid);
     console.log(post);
     res.status(200).json(post);
   } catch (err) {
@@ -132,7 +133,7 @@ module.exports.updateReply = asyncHandler(async (req, res) => {
 module.exports.deleteOnePost = asyncHandler(async (req, res) => {
   try {
     // console.log(req.params.postid);
-    const post = await Post.findById(req.params.postid.toString());
+    const post = await Post.findById(req.params.postid);
     console.log(post);
     res.status(200).json(post);
   } catch (err) {

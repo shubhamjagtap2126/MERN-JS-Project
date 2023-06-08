@@ -8,10 +8,8 @@ const { User } = require("../models");
 module.exports.getUser = asyncHandler(async (req, res) => {
   // res.status(200).json("get route")
   // console.log(req.user._id.toString());
-  const user = await User.find({ _id: req.user._id.toString() }).select(
-    "-password"
-  );
-  res.status(200).json(user);
+  const user = await User.find({ _id: req.user._id }).select("-password");
+  res.status(200);
 });
 
 //
@@ -22,10 +20,10 @@ module.exports.signupUser = asyncHandler(async (req, res) => {
     !validator.isAlpha(name) ||
     !validator.isStrongPassword(password, {
       minLength: 4,
-      minLowercase: 1,
-      minUppercase: 0,
-      minNumbers: 1,
-      minSymbols: 0,
+      // minLowercase: 1,
+      // minUppercase: 0,
+      // minNumbers: 1,
+      // minSymbols: 0,
     }) ||
     !validator.isEmail(email)
   ) {
@@ -56,13 +54,17 @@ module.exports.loginUser = asyncHandler(async (req, res) => {
     res.status(400).json({ error: "Please add details" });
   }
   // check user exist
-  const user = await User.findOne({ email });
-  // userExists({ token: jwtToken(userExists._id) });
-  // console.log(userExists);
-  if (user && (await bcryptjs.compare(password, user.password))) {
-    res.status(201).json({ user, token: jwtToken(user._id) });
+  try {
+    const user = await User.findOne({ email });
+    if (user && (await bcryptjs.compare(password, user.password))) {
+      res.status(201).json({ user, token: jwtToken(user._id) });
+    }
+  } catch {
+    (error) => {
+      res.status(400);
+      throw Error(error.message);
+    };
   }
-  res.status(400).json({ error: "Signup now" });
 });
 
 //
