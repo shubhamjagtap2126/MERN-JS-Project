@@ -63,7 +63,7 @@ export const Login = () => {
       const { dispatch } = useAuthContext();
       dispatch({ type: "LOGIN", payload: json });
 
-      // redirect
+      // redirect after login
       return toast.success(`Welcome, ${json.user.name}`), redirect("/");
     } catch {
       (err) => setError(err);
