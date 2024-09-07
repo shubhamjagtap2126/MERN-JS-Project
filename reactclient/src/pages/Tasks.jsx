@@ -1,16 +1,31 @@
 import { createContext, useReducer, useContext, useEffect, useState } from "react";
-import { axiosInstance } from "./OldFiles/Tasks";
-import { useAuthContext } from "../Hooks";
+// import { useAuthContext } from "../Hooks";
 import { toast } from "react-toastify";
 import { formatDistanceToNow } from "date-fns";
 import { PGTitle } from "./Home";
+import { TabsMenu } from "../components/Tabs";
+import { SiteData } from "../features/SiteData";
+import { Outlet } from "react-router-dom";
+import { LocalStorageLoader } from "../Helper";
 
-export const TaskPage = () => {
+export const Apps = () => {
   return (
     <div className="container col-md-8 my-4">
+      <PGTitle title={"Apps"} />
+      <section className="my-2 container ">
+        <TabsMenu tabData={SiteData.PrivateMenus.TasksMenu} />
+      </section>
+      <Outlet />
+    </div>
+  );
+};
+
+export const Task = () => {
+  return (
+    <div>
       <PGTitle title={"Tasks"} />
+      <h3>Using React UseContext </h3>
       <TasksProvider>
-        <h1>Tasks</h1>
         <NewTaskForm />
         <TasksList />
       </TasksProvider>
@@ -63,45 +78,13 @@ export const TasksProvider = ({ children }) => {
   return <TasksContext.Provider value={{ state, dispatch }}>{children}</TasksContext.Provider>;
 };
 
-export const TasksList = () => {
-  const { state, dispatch } = useContext(TasksContext);
-  const { user } = useAuthContext();
-  // console.log(state.tasks);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      dispatch({ type: ACTIONS.FETCH_TASKS_REQUEST });
-      try {
-        const response = await axiosInstance.get("tasks", {
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        dispatch({ type: ACTIONS.FETCH_TASKS_SUCCESS, payload: response.data });
-        toast.success(`Tasks loaded succesfully`);
-      } catch (error) {
-        dispatch({ type: ACTIONS.FETCH_TASKS_ERROR, payload: error.message });
-        toast.error(`Something went wrong`);
-      }
-    };
-    fetchTasks();
-  }, [user]);
-
-  return (
-    <>
-      {state.loading && <p>Loading tasks...</p>}
-      {state.error && <p>Error: {state.error}</p>}
-      <ul className="list-group" style={{ listStyle: "none" }}>
-        {state.tasks.map((task) => (
-          <li key={task._id}>{<Task task={task} />}</li>
-        ))}
-      </ul>
-    </>
-  );
-};
+// =========> TaskApp = Apps <=========
 
 export const NewTaskForm = () => {
   const [task, setTask] = useState("");
   const { dispatch } = useContext(TasksContext);
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const user = LocalStorageLoader("user");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -117,57 +100,82 @@ export const NewTaskForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="input-group">
-        <span className="input-group-text">Task</span>
-        <input className="form-control" type="text" placeholder="Create your task" value={task} onChange={(event) => setTask(event.target.value)} />
-        <button className="btn btn-outline-primary" type="submit">
-          Add Task
-        </button>
-      </div>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <span className="input-group-text">Task</span>
+          <input className="form-control" type="text" placeholder="Create your task" value={task} onChange={(event) => setTask(event.target.value)} />
+          <button className="btn btn-outline-primary" type="submit">
+            Add Task
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 
-export const Task = ({ task }) => {
+// =========> Main = Component  <=========
+export const TasksList = () => {
+  const { state, dispatch } = useContext(TasksContext);
+  // const { user } = useAuthContext();
+  const user = LocalStorageLoader("user");
+  // console.log(state.tasks);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      dispatch({ type: ACTIONS.FETCH_TASKS_REQUEST });
+      try {
+        const response = await axiosInstance.get("tasks", {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        dispatch({ type: ACTIONS.FETCH_TASKS_SUCCESS, payload: response.data });
+        toast.success(`Tasks loaded succesfully`);
+      } catch (error) {
+        dispatch({ type: ACTIONS.FETCH_TASKS_ERROR, payload: error.message });
+        toast.error(`error: ${error.message}`);
+      }
+    };
+    fetchTasks();
+  }, []);
+
+  return (
+    <>
+      {state.loading && <p>Loading tasks...</p>}
+      {state.error && <p>Error: {state.error}</p>}
+      <ul className="list-group" style={{ listStyle: "none" }}>
+        {state.tasks.map((task) => (
+          <li key={task._id}>{<Tasks task={task} />}</li>
+        ))}
+      </ul>
+    </>
+  );
+};
+
+export const Tasks = ({ task }) => {
   const [editing, setEditing] = useState(false);
   const [newTask, setTitle] = useState(task.task);
   const [isDone, setIsDone] = useState(task.isDone);
   const { dispatch } = useContext(TasksContext);
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const user = LocalStorageLoader("user");
 
   const handlecomplete = async () => {
     // console.log(task.isDone);
     setIsDone((previsDone) => !previsDone);
     console.log(isDone);
     try {
-      const response = await axiosInstance.patch(
-        `tasks/${task._id}`,
-        { isDone: isDone },
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        }
-      );
-      dispatch({
-        type: ACTIONS.UPDATE_TASK,
-        payload: response.data,
-      });
+      const response = await axiosInstance.patch(`tasks/${task._id}`, { isDone: isDone }, { headers: { Authorization: `Bearer ${user.token}` } });
+      dispatch({ type: ACTIONS.UPDATE_TASK, payload: response.data });
     } catch (error) {
       console.log(error);
     }
   };
   const handleUpdate = async () => {
     try {
-      const response = await axiosInstance.patch(
-        `tasks/${task._id}`,
-        { task: newTask },
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        }
-      );
+      const response = await axiosInstance.patch(`tasks/${task._id}`, { task: newTask }, { headers: { Authorization: `Bearer ${user.token}` } });
       dispatch({ type: ACTIONS.UPDATE_TASK, payload: response.data });
       console.log({ ...task, newTask });
-      toast.success(`${task.task} updated wiht ${newTask}`);
+      toast.success(`${task.task} updated with ${newTask}`);
       setEditing(false);
     } catch (error) {
       console.log(error);
@@ -178,13 +186,7 @@ export const Task = ({ task }) => {
     try {
       console.log({ task });
 
-      const response = await axiosInstance.patch(
-        `tasks/${task._id}`,
-        { isActive: false },
-        {
-          headers: { Authorization: `Bearer ${user.token}` },
-        }
-      );
+      const response = await axiosInstance.patch(`tasks/${task._id}`, { isActive: false }, { headers: { Authorization: `Bearer ${user.token}` } });
       console.log(response.data);
       dispatch({ type: ACTIONS.DELETE_TASK, payload: response.data });
     } catch (error) {

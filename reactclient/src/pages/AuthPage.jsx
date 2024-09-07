@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { redirect, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { PGTitle } from "./Home";
-import { useAuthContext } from "../Hooks";
-import { axiosInstance } from "./OldFiles/Tasks";
+// import { useAuthContext } from "../Hooks";
+import { axiosInstance } from "../features/AppSlices";
 import { Tabs, Tab } from "react-bootstrap/";
 import { toast } from "react-toastify";
+import { HashLink } from "react-router-hash-link";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const AuthTab = () => {
   return (
@@ -16,10 +18,8 @@ export const AuthTab = () => {
             <Tab eventKey="Login" title="Login">
               <Login />
             </Tab>
-            <Tab eventKey="Register" title="Register">
-              <div className="register" id="Register">
-                <Register />
-              </div>
+            <Tab eventKey="Register" title="Register" id="Register">
+              <Register />
             </Tab>
           </Tabs>
         </div>
@@ -28,9 +28,53 @@ export const AuthTab = () => {
   );
 };
 
+// =========>  =  <=========
+// run inside the console
+export const usersData = {
+  _id: "648b278b2e7491798833d314",
+  name: "Raju John",
+  email: "john@gmail.com",
+  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGIyNzhiMmU3NDkxNzk4ODMzZDMxNCIsImlhdCI6MTcxNjIyMzEzMSwiZXhwIjoxNzE4ODE1MTMxfQ.VySc5dn83DypX4vUPcm_u60n0YEgGoRi4QFbSpMm2cQ",
+};
+// localStorage.setItem("users", JSON.stringify(usersData));
+
+// =========> UsersAuth  = Slice <=========
+export const authSlice = createSlice({
+  name: "users",
+  initialState: {
+    users: usersData ? usersData : [],
+    loading: true,
+    error: "",
+  },
+  reducers: {
+    login: (state) => {
+      state.users.users = usersData;
+    },
+    logout: (state) => {
+      state.users.users = null;
+    },
+    // addUser (state, action) => { state.users = action.payload },
+    authLoading: (state) => {
+      return { ...state, loading: true };
+    },
+    authError: (state, action) => {
+      return { ...state, error: action.payload };
+    },
+  },
+  // extraReducers: {}
+});
+// Action creators are generated for each case reducer function
+export const { login, logout, authLoading, authError } = authSlice.actions;
+export const usersState = (state) => state.users;
+
+// Login Page
 export const Login = () => {
-  const [isLoading, setisLoading] = useState(false);
-  const [error, setError] = useState("");
+  // Navigate after login
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+
+  // Form all fields UseState mapping
   const initialState = {
     email: "",
     password: "",
@@ -57,22 +101,23 @@ export const Login = () => {
       setisLoading(false);
       setFormData(initialState);
       // save the user to local storage
+      setUser(json ? json : userAuthData);
       localStorage.setItem("user", JSON.stringify(json));
+      toast.success(`Welcome, ${json.user.name}`);
+      navigate("/", { replace: true });
 
       // update the auth context
-      const { dispatch } = useAuthContext();
-      dispatch({ type: "LOGIN", payload: json });
-
-      // redirect after login
-      return toast.success(`Welcome, ${json.user.name}`), redirect("/");
+      // const { dispatch } = useAuthContext();
+      // dispatch({ type: "LOGIN", payload: json });
     } catch {
-      (err) => setError(err);
+      (error) => setError(error);
     }
   };
+
   return (
-    <form className=" g-3 needs-validation" novalidate onSubmit={handleSubmit}>
+    <form className=" g-3 needs-validation" onSubmit={handleSubmit}>
       <div className="mb-2">
-        <label for="Your Email" className="form-label">
+        <label htmlFor="Your Email" className="form-label">
           Email
         </label>
         <div className="input-group has-validation">
@@ -85,7 +130,7 @@ export const Login = () => {
       </div>
 
       <div className="mb-2">
-        <label for="yourPassword" className="form-label">
+        <label htmlFor="yourPassword" className="form-label">
           Password
         </label>
         <input type="password" name="password" value={password} onChange={onChange} className="form-control" id="yourPassword" required />
@@ -98,7 +143,7 @@ export const Login = () => {
 
       <div className="mb-2">
         <p className="small mb-0">
-          Don't have account? <Link to={{ hash: "#Register" }}>Try Register !</Link>
+          Don't have account? <HashLink to={"#Register"}>Try Register !</HashLink>
         </p>
       </div>
       {error && (
@@ -110,11 +155,11 @@ export const Login = () => {
   );
 };
 
+// Register Page
 export const Register = () => {
+  const navigate = useNavigate();
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
   const initialState = { name: "", email: "", password: "" };
   const [formData, setFormData] = useState(initialState);
   const { name, email, password } = formData;
@@ -131,31 +176,31 @@ export const Register = () => {
     const data = { email, password, name };
     setisLoading(true);
     console.log(data);
+    console.log(error);
     try {
       const response = await axiosInstance.post("/users/signup", data);
       const json = response.data;
       // console.log(response.data);
-      if (json) {
-        setisLoading(false);
-        setFormData(initialState);
-        // save the user to local storage
-        localStorage.setItem("user", JSON.stringify(json));
+      setisLoading(false);
+      setFormData(initialState);
+      // save the user to local storage
+      localStorage.setItem("user", JSON.stringify(json));
+      toast.success(`Welcome, ${json.user.name}`);
 
-        // update the auth context
-        const { dispatch } = useAuthContext();
-        dispatch({ type: "SIGNUP", payload: json });
+      // Navigate after login
+      navigate("/", { replace: true });
 
-        const navigate = useNavigate();
-        navigate("/");
-      }
+      // update the auth context
+      // const { dispatch } = useAuthContext();
+      // dispatch({ type: "SIGNUP", payload: json });
     } catch {
-      (err) => setError(err);
+      (error) => setError(error);
     }
   };
   return (
-    <form className="row g-3 needs-validation" novalidate onSubmit={handleSubmit}>
+    <form id="Register" className="row g-3 needs-validation" onSubmit={handleSubmit}>
       <div className="mb-2">
-        <label for="yourName" className="form-label">
+        <label htmlFor="yourName" className="form-label">
           Your Name
         </label>
         <input value={name} onChange={onChange} type="text" name="name" className="form-control" id="yourName" required />
@@ -163,7 +208,7 @@ export const Register = () => {
       </div>
 
       <div className="mb-2">
-        <label for="email" className="form-label">
+        <label htmlFor="email" className="form-label">
           Your Email
         </label>
         <div className="input-group has-validation">
@@ -176,7 +221,7 @@ export const Register = () => {
       </div>
 
       <div className="mb-2">
-        <label for="Password" className="form-label">
+        <label htmlFor="Password" className="form-label">
           Password
         </label>
         <input value={password} onChange={onChange} type="password" name="password" className="form-control" id="Password" required />
@@ -186,14 +231,19 @@ export const Register = () => {
       <div className="mb-2">
         <div className="form-check">
           <input className="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required />
-          <label className="form-check-label" for="acceptTerms">
+          <label className="form-check-label" htmlFor="acceptTerms">
             I agree and accept the <Link to="#">terms and conditions</Link>
           </label>
           <div className="invalid-feedback">You must agree before submitting.</div>
         </div>
       </div>
       <div className="mb-2">
-        <button className="btn btn-primary">Create Account</button>
+        <button
+          // disabled={isLoading}
+          className="btn btn-primary"
+        >
+          Create Account
+        </button>
       </div>
       {error && (
         <div className="alert alert-danger" role="alert">
@@ -203,3 +253,11 @@ export const Register = () => {
     </form>
   );
 };
+
+
+
+
+
+
+
+

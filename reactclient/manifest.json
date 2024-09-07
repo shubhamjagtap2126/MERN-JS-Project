@@ -1,0 +1,38 @@
+{
+  "name": "sjweb.dev",
+  "short_name": "sjweb.dev",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#3740ff",
+  "theme_color": "#fff",
+  "id": "/",
+  "icons": [
+    {
+      "src": "/images/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "description": "description",
+  "lang": "en",
+  "categories": ["education", "webapp"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/screenshot2.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [{ "name": "Home", "url": "/" }]
+}

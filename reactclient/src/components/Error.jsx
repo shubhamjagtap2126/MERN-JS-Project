@@ -7,10 +7,12 @@ const ErrorElement = () => {
 
   return (
     <div className="error">
-      <Card bg={"danger"} style={{ width: "30rem" }} text={"white"} className="mb-2 justify-content-center align-items-center">
+      <Card border="danger" style={{ width: "30rem" }} text={"danger"} className="mb-2 justify-content-center align-items-center">
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
         <Card.Body className="">
-          <Card.Title>Error</Card.Title>
+          <Card.Title>
+            <b> Error</b>
+          </Card.Title>
           <Card.Text>
             <p>{error.message || error.statusText}</p>
           </Card.Text>

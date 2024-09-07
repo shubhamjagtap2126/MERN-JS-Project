@@ -1,21 +1,21 @@
 import axios from "axios";
-import { AuthContext } from "./context/AuthContext";
+// import { AuthContext } from "./features/AuthSlice";
 import { useContext, useEffect, useState } from "react";
 
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw Error("useAuthContext must be used inside an AuthContextProvider");
-  }
+// export const useAuthContext = () => {
+//   // const context = useContext(AuthContext);
+//   // if (!context) {
+//     throw Error("useAuthContext must be used inside an AuthContextProvider");
+//   }
 
-  const { user } = context;
-  // console.log(user);
+//   // const { user } = context;
+//   // console.log(user);
 
-  return context;
-};
+//   return context;
+// };
 
 export function useFetch(uri) {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();

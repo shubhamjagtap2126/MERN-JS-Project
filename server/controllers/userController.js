@@ -16,19 +16,20 @@ module.exports.getUser = asyncHandler(async (req, res) => {
 module.exports.signupUser = asyncHandler(async (req, res) => {
   //   res.status(200).json("signup route");
   const { name, password, email } = req.body;
-  if (
-    !validator.isAlpha(name) ||
-    !validator.isStrongPassword(password, {
-      minLength: 4,
-      // minLowercase: 1,
-      // minUppercase: 0,
-      // minNumbers: 1,
-      // minSymbols: 0,
-    }) ||
-    !validator.isEmail(email)
-  ) {
-    res.status(400).json({ error: "Please check the details" });
-  }
+
+  // if (
+  //   !validator.isAlpha(name) ||
+  //   !validator.isStrongPassword(password, {
+  //     minLength: 4,
+  //     // minLowercase: 1,
+  //     // minUppercase: 0,
+  //     // minNumbers: 1,
+  //     // minSymbols: 0,
+  //   }) ||
+  //   !validator.isEmail(email)
+  // ) {
+  //   res.status(400).json({ error: "Please check the details" });
+  // }
   // check user exist
   const userExists = await User.findOne({ email });
   if (userExists) {

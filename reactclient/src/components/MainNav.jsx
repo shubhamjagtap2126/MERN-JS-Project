@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import { SiteData } from "../SiteData";
-import { useAuthContext } from "../Hooks";
-
+import { SiteData } from "../features/SiteData";
+// import Offcanvas from "react-bootstrap/Offcanvas";
+// import { useAuthContext } from "../Hooks";
+import { axiosInstance } from "../features/AppSlices";
 export const NavMenus = ({ data, Brand = false }) => {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const users = useSelector(usersState).users;
   return (
     <nav className="navbar navbar-expand-md navbar-dark sticky-top" style={{ backgroundColor: "#7532FA" }}>
-      <div class="d-flex align-items-center justify-content-between">
+      <div className="d-flex align-items-center justify-content-between">
         {Brand ? (
           <>
             <p className="navbar-brand">
@@ -55,7 +57,7 @@ export const NavMenus = ({ data, Brand = false }) => {
               </li>
             ))}
           </ul>
-          {user ? (
+          {users ? (
             <div className="d-flex ms-auto">
               <button onClick={() => LogoutAction()} className="btn btn-info btn-sm">
                 Logout
@@ -77,7 +79,8 @@ export const NavMenus = ({ data, Brand = false }) => {
 import { Container, Navbar, Nav, NavDropdown, Offcanvas } from "react-bootstrap/";
 
 export const MakeNavItems = ({ data }) => {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const users = useSelector(usersState).users;
   const expand = "md";
   return (
     <div>
@@ -124,9 +127,9 @@ export const MakeNavItems = ({ data }) => {
               ))}
 
               {/* 2nd side */}
-              {user ? (
+              {users ? (
                 <div className="d-flex ms-auto">
-                  <UserProfile user={user} />
+                  <UserProfile user={users} />
                 </div>
               ) : (
                 <Nav>
@@ -144,8 +147,12 @@ export const MakeNavItems = ({ data }) => {
 };
 
 import { Dropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, usersState } from "../pages/AuthPage";
 export const UserProfile = ({ user }) => {
-  // console.log(user.user.name);
+  const users = useSelector(usersState).users;
+  // console.log(users);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -153,19 +160,19 @@ export const UserProfile = ({ user }) => {
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic" drop="start">
           <img />
-          {user.user.name}
+          {users.name}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item className="justify-content-center">
-            <h4>{user.user.name}</h4>
-            <p>{user.user._id}</p>
+            <h4>{users.name}</h4>
+            <p>{users.name}</p>
           </Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item>Another action</Dropdown.Item>
           <Dropdown.Divider />
 
-          <button onClick={() => LogoutAction()} className="btn btn-primary mx-3">
+          <button onClick={() => dispatch(logout())} className="btn btn-primary mx-3">
             Logout
           </button>
         </Dropdown.Menu>
