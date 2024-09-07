@@ -1,8 +1,5 @@
-import { Link, useNavigate, useRouteError } from "react-router-dom";
-
 // =========> Provise = Waiting <=========
-export const waait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 800));
+export const waait = () => new Promise((res) => setTimeout(res, Math.random() * 800));
 
 // ===========> Local storage reader <================
 export const LocalStorageLoader = (jsonData) => {
@@ -31,3 +28,9 @@ export function userLoader() {
   //   console.log(user);
   return { user };
 }
+
+// =========> colors <=========
+export const generateRandomColor = () => {
+  const randNum = Math.floor(Math.random() * 30);
+  return `${randNum} 65% 50%`;
+};

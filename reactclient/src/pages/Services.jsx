@@ -1,8 +1,8 @@
 import { Outlet, Link, useLoaderData, Form } from "react-router-dom";
 import { TabsMenu } from "../components/Tabs";
-import { SiteData } from "../SiteData";
-import { PGTitle, CustomCorousal } from "./Home";
-import { LocalStorageLoader, waait } from "../Helper";
+import { SiteData } from "../features/SiteData";
+import { PGTitle } from "./Home";
+import { CustomCorousal } from "../components/Corousal";
 
 // =========>  =  <=========
 
@@ -10,7 +10,7 @@ export function Services() {
   return (
     <div>
       <PGTitle title="Services" />
-      <section className="my-2 d-flex justify-content-center  ">
+      <section className="my-2 container ">
         <TabsMenu tabData={SiteData.PrivateMenus.ServiceTabMenu} />
       </section>
 
@@ -66,7 +66,25 @@ export function Prepaid() {
 export function Recharge() {
   return (
     <div>
-      <section id="featured-services" className="featured-services">
+      <section id="hero-animated" className="my-4 hero-animated d-flex align-items-center">
+        <div className="container d-flex flex-column justify-content-center align-items-center text-center position-relative aos-init aos-animate" data-aos="zoom-out">
+          <img width={400} src="https://bootstrapmade.com/demo/templates/HeroBiz/assets/img/hero-carousel/hero-carousel-3.svg" className="img-fluid animated" />
+          <h2>
+            Welcome to <span>HeroBiz</span>
+          </h2>
+          <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
+          <div className="d-flex">
+            <Link to="" className="btn btn-primary scrollto mx-2">
+              Get Started
+            </Link>
+            <Link to="" className="mx-2 glightbox btn btn-secondary d-flex align-items-center">
+              <i className="bi bi-play-circle"></i>
+              <span>Watch Video</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section id="featured-services" className="my-4 featured-services">
         <div className="container">
           <div className="row gy-4">
             <div className="col-xl-3 col-md-6 d-flex aos-init aos-animate" data-aos="zoom-out">
@@ -135,11 +153,7 @@ export function Recharge() {
               <h3>
                 Alias sunt quas <em>Cupiditate</em> oluptas hic minima
               </h3>
-              <p>
-                {" "}
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
-              </p>
+              <p> Duis aute irure non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               <a className="cta-btn align-self-start" href="#">
                 Call To Action
               </a>
@@ -150,24 +164,6 @@ export function Recharge() {
                 <img src="https://www.jio.com/new-banner.png" alt="" className="img-fluid" />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section id="hero-animated" className="hero-animated d-flex align-items-center">
-        <div className="container d-flex flex-column justify-content-center align-items-center text-center position-relative aos-init aos-animate" data-aos="zoom-out">
-          <img width={400} src="https://bootstrapmade.com/demo/templates/HeroBiz/assets/img/hero-carousel/hero-carousel-3.svg" className="img-fluid animated" />
-          <h2>
-            Welcome to <span>HeroBiz</span>
-          </h2>
-          <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
-          <div className="d-flex">
-            <Link to="" className="btn btn-primary scrollto mx-2">
-              Get Started
-            </Link>
-            <Link to="" className="mx-2 glightbox btn btn-secondary d-flex align-items-center">
-              <i className="bi bi-play-circle"></i>
-              <span>Watch Video</span>
-            </Link>
           </div>
         </div>
       </section>

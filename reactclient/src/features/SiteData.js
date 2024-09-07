@@ -26,14 +26,20 @@ export const SiteData = {
     { text: "Services", link: "/services/discover", icon: "" },
     // Private Menu Shift
     // { text: "SignUp", link: "/signup", icon: "" },
+    { text: "Apps", link: "/apps/todos", icon: "" },
+    { text: "Budget", link: "/budget/serverless", icon: "" },
+    { text: "WhatsChat", link: "/whatschat", icon: "" },
+    { text: "Posts", link: "/posts", icon: "" },
     { text: "Learning", link: "/learning/home", icon: "" },
     { text: "eCommerce", link: "/ecommerce", icon: "" },
-    { text: "Task", link: "/tasks", icon: "" },
-    { text: "Budget", link: "/budget", icon: "" },
-    { text: "Posts", link: "/posts", icon: "" },
   ],
   PrivateMenus: {
     NavMenu: [],
+    TasksMenu: [
+      { text: "Todos", link: "/apps/todos", icon: "bi-sim" },
+      { text: "Tasks", link: "/apps/tasks", icon: "bi-android2" },
+      { text: "TasksApp", link: "/apps/tasksapp", icon: "bi-sim" },
+    ],
     ServiceTabMenu: [
       { text: "Discover", link: "/services/discover", icon: "bi-android2" },
       { text: "Prepaid", link: "/services/prepaid", icon: "bi-sim" },
@@ -58,8 +64,8 @@ export const SiteData = {
       },
     ],
     BudgetTabMenu: [
-      { text: "MongoDb", link: "/budget", icon: "bi-list" },
       { text: "Serverless", link: "/budget/serverless", icon: "bi-list" },
+      { text: "MongoDb", link: "/budget", icon: "bi-list" },
     ],
     // YTCards: [],
   },
@@ -99,13 +105,13 @@ export const SiteData = {
         text: "P",
         link: "#",
         class: "",
-        image: "https://www.jio.com/cricket-bonanza-1b.webp ",
+        image: "https://www.jio.com/jioplus-masthead-desk-v1.png",
       },
       {
         text: "P",
         link: "#",
         class: "",
-        image: " https://jep-asset.akamaized.net/jio/webp/homepage/dive-masthd-desk-v3.webp ",
+        image: " https://jep-asset.akamaized.net/jio/webp/homepage/dive-masthd-desk-v3.webp",
       },
       {
         text: "P",
@@ -406,5 +412,3 @@ export const SiteData = {
     ],
   },
 };
-
-

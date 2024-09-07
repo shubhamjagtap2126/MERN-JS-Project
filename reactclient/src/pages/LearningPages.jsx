@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { SiteData } from "../SiteData";
+import { SiteData } from "../features/SiteData";
 import { TabsMenu } from "../components/Tabs";
 import { Outlet, Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
@@ -155,7 +155,7 @@ export const HScrollTab = ({ data, title = true }) => {
   }, [tab]);
 
   return (
-    <div className="my-3 mx-auto justify-content-center">
+    <div className="my-3 mx-auto">
       {title ? <h1>HScrollTab</h1> : <h1 hidden>HScrollTab</h1>}
       <ul className="d-flex overflow-auto" style={{ listStyle: "none" }}>
         {data.map((item, index) => (

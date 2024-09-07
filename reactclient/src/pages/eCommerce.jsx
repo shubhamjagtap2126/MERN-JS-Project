@@ -1,4 +1,4 @@
-import { SiteData } from "../SiteData";
+import { SiteData } from "../features/SiteData";
 import { TabsMenu } from "../components/Tabs";
 import { Outlet, Link } from "react-router-dom";
 import { PGTitle } from "./Home";
@@ -7,7 +7,7 @@ export const ECommerce = () => {
   return (
     <div>
       <PGTitle title={"eCommerce"} />
-      <section className="container my-2 d-flex justify-content-center ">
+      <section className="container my-2 ">
         <TabsMenu tabData={SiteData.PrivateMenus.ECommerceTabMenu} />
       </section>
       <Outlet />

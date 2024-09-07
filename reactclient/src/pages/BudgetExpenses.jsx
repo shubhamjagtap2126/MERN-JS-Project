@@ -2,18 +2,18 @@ import { createContext, useReducer, useContext, useEffect, useState } from "reac
 import { Form, useParams, Link, Outlet } from "react-router-dom";
 import { PGTitle } from "./Home";
 import { toast } from "react-toastify";
-import { useAuthContext } from "../Hooks";
-import { axiosInstance } from "./OldFiles/Tasks";
-import { AuthContext } from "../context/AuthContext";
+// import { useAuthContext } from "../Hooks";
+// import { AuthContext } from "../features/AuthSlice";
 import { ProgressBar } from "react-bootstrap";
 import { TabsMenu } from "../components/Tabs";
-import { SiteData } from "../SiteData";
+import { SiteData } from "../features/SiteData";
+import { axiosInstance } from "../features/AppSlices";
 
 // =========> Page = Outlet <=========
 export function BudgetPage() {
   return (
     <div>
-      <section className="my-2 d-flex justify-content-center  ">
+      <section className="my-2 container ">
         <TabsMenu tabData={SiteData.PrivateMenus.BudgetTabMenu} />
       </section>
 
@@ -106,7 +106,7 @@ export const BudgetProvider = ({ children }) => {
 
 export const AllBudget = () => {
   const { state, dispatch } = useContext(BudgetContext);
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
   //   console.log(user.token);
 
   useEffect(() => {
@@ -162,7 +162,7 @@ export const AllBudget = () => {
 };
 
 export const BudgetForm = () => {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
   const [error, setError] = useState();
   const initialBudget = { category: "", budgetAmount: 0 };
   const [formData, setFormData] = useState(initialBudget);
@@ -265,7 +265,7 @@ export const OneBudget = () => {
 // =========> Expenses = create form <=========
 export const ExpensesForm = () => {
   const { state, dispatch } = useContext(BudgetContext);
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
   const initialExpense = {
     budget: null,
     expense: "",
@@ -339,7 +339,7 @@ export const ExpensesForm = () => {
 
 export const CalculateExpensesBudget = () => {
   const { state } = useContext(BudgetContext);
-  const { user } = AuthContext;
+  // const { user } = AuthContext;
   // console.log(state.budgets, state.expense);
 
   return <div>BudgetExpenses</div>;

@@ -1,0 +1,622 @@
+[
+  {
+    "en": {
+      "SignInScreen": {
+        "Welcome": "Welcome",
+        "SignIn": "Sign In",
+        "SignUp": "Sign Up",
+        "otpSent": "We've sent a 6 digit OTP to",
+        "SignInUsingPassword": "Sign In using Password",
+        "or": "OR",
+        "CreateAccount": "Create an Account",
+        "PhoneNumberLable": "Phone Number",
+        "EnterPasswordLabel": "Enter password",
+        "ResetPassword": "Reset Password",
+        "SignInUsingOTP": "Sign In using OTP",
+        "Next": "Next",
+        "AlreadyAccount": "Already have an account?",
+        "resendOTP": "Resend OTP",
+        "CreatePassword": "Create Password",
+        "SetPassword": "Set Password",
+        "goBack": "Go Back",
+        "BasicDetails": "We need some basic details to get started!",
+        "YourCityPincode": "Your City Pincode",
+        "YourDateOfBirth": "Your Date of Birth",
+        "YourFullName": "Your Full Name"
+      },
+      "HomeScreen": {
+        "namaste": "Namaste",
+        "startYourDay": "Start your day with wisdom",
+        "pickUpFrom": "Pick up from where you left off",
+        "recommendedActivity": "Recommended Activity",
+        "recommendedProducts": "Recommended Products",
+        "trendingNearYou": "Trending Near You!",
+        "contentAsYouLikeIt": "Content as you like it",
+        "viewAll": "View All",
+        "events": "Events",
+        "courses": "Courses",
+        "readAll": "Read All"
+      },
+      "AgnihotraScreen": {
+        "startIn": "Start in",
+        "sunset": "Sunset",
+        "agnihotra": "Agnihotra",
+        "pune": "Pune",
+        "play": "Play",
+        "mantra": "Mantra",
+        "how": "How",
+        "toPerform": "To Perform",
+        "get": "Get",
+        "AgnihotraKit": "Agnihotra Kit",
+        "ourGurus": "Our Gurus",
+        "agnihotraEvents": "Agnihotra Events",
+        "courses": "Courses",
+        "stepsToPerform": "Steps to perform"
+      },
+      "FeedsScreen": {
+        "myFeed": "My Feed",
+        "startYourDay": "Start your day with some positive energy!",
+        "trendingVideos": "Trending Videos!",
+        "vastuForHarmony": "Vastu for Harmony",
+        "quickRecipe": "Quick Recipe",
+        "viewAll": "View All",
+        "recommendedForYou": "Recommended for you",
+        "financialBalance": "Financial Balance",
+        "relatedVideos": "Related Videos",
+        "indulgeLearning": "Indulge in the learning",
+        "recommendForYou": "Recommended for you"
+      },
+      "ProductDetails": {
+        "topProduct": "Top Product of the Day",
+        "readArticleBtn": "Read Article",
+        "productCategory": "Product Category",
+        "devices": "Devices",
+        "Appliances": "Appliances",
+        "Travel": "Travel",
+        "Home": "Home",
+        "Kitchen": "Kitchen",
+        "Fashion": "Fashion",
+        "SpiritualProduct": "Spiritual Product",
+        "shopAll": "Shop All",
+        "FamilyGuide": "Family Guide",
+        "off": "off",
+        "orderNow": "Order Now",
+        "TrendingProducts": "Trending Products"
+      },
+      "MyProfile": {
+        "edit": "Edit",
+        "personalInfo": "Personal Info",
+        "change": "Change",
+        "password": "Password",
+        "getHelp": "Get Help",
+        "logout": "Logout",
+        "deleteAcc": "Delete Account",
+        "getHelpModal": {
+          "forAnyHelp": "For any help or assistance",
+          "writeToUs": "WRITE TO US",
+          "whatsAppUs": "WHATSAPP US",
+          "close": "CLOSE"
+        },
+        "logoutModal": {
+          "areYouSure": "Are you sure you want to ",
+          "logoutYourAccount": "logout your account?",
+          "goBack": "GO BACK",
+          "yesLogout": "YES, LOGOUT"
+        },
+        "customeModal": {
+          "areYouSure": "Are you sure you want to ",
+          "deleteYourAccount": "delete your account?",
+          "ThisAction": "This action cannot be undone.",
+          "goBack": "GO BACK",
+          "yesDelete": "YES, DELETE"
+        }
+      },
+      "EditInfo": {
+        "uploadSuccess": "Image Upload Successfully.",
+        "upploadFailure": "Image Upload Failed.",
+        "fullNameLabel": "Your full name",
+        "fullNameError": "Please enter full name",
+        "dateOfBirth": "Your date of birth",
+        "pincode": "Your city pincode",
+        "pincodeError": "Please enter pincode",
+        "updateBtn": "Update Details",
+        "oldPass": "Enter old password",
+        "oldPassError": "Please enter old password",
+        "newPass": "Enter new password",
+        "newPassError": "Please enter new password",
+        "reEnterNewPass": "Re-enter new password",
+        "reEnterNewPassError": "Please re-enter new password",
+        "submitBtn": "Submit"
+      },
+      "PanchanngeScreen": {
+        "startYourDay": "Start your day with wisdom"
+      },
+      "EventScreen": {
+        "event": "Event",
+        "upcommingEvent": "Upcomming Events",
+        "registerNow": "Register Now",
+        "eventDetails": "Event Details",
+        "eventDescription": "Event Description",
+        "brochure": "Brochure",
+        "gallary": "Gallary",
+        "sponsors": "Sponsors",
+        "registerBtn": "Register Now for Event"
+      },
+      "TrendingScreen": {
+        "back": "Back",
+        "home": "Home",
+        "buyOn": "Buy on",
+        "ourPick": "Our Pick",
+        "similarFind": "Similar Find",
+        "readReview": "Read Review"
+      },
+      "Courses": {
+        "Courses": "Courses",
+        "Spiritual": "Spiritual",
+        "viewAll": "View All",
+        "Physical": "Physical",
+        "SriM": "Sri M",
+        "Mind": "Mind",
+        "Financial": "Financial",
+        "Teachers": "Teachers",
+        "Lessons": "Lessons",
+        "Mins": "Mins",
+        "Week": "Week",
+        "Videos": "Videos",
+        "mins": "mins",
+        "Tasks": "Tasks",
+        "QuickRecipe": "Quick 30 mins recipe of delicious modak Quick 30 mins recipe of delicious modak"
+      },
+      "ArticleDetails": {
+        "RelatedVideos": "Related Videos",
+        "viewAll": "View All",
+        "IndulgeLearning": "Indulge in the learning",
+        "RecommendedForYou": "Recommended for you"
+      },
+      "MainScreen": {
+        "Home": "Home",
+        "Agnihotra": "Agnihotra",
+        "My Feeds": "My Feeds",
+        "More": "More"
+      },
+      "Components": {
+        "PredictionCard": {
+          "noPanchangAvailable": "No panchang available for today"
+        },
+        "ActivityCard": {
+          "Kcal": "Kcal",
+          "Calories": "Calories",
+          "mins": "mins",
+          "Duration": "Duration"
+        },
+        "ProductCard": {
+          "TopProduct": "Top Product of the Day"
+        },
+        "EventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "CourseCard": {
+          "BtnTitle": "View Courses"
+        },
+        "AgnihotraEventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "DeviceCard": {
+          "readReview": "Read Review"
+        }
+      }
+    },
+    "hin": {
+      "SignInScreen": {
+        "Welcome": "Welcome",
+        "SignIn": "Sign In",
+        "SignUp": "Sign Up",
+        "otpSent": "We've sent a 6 digit OTP to",
+        "SignInUsingPassword": "Sign In using Password",
+        "or": "OR",
+        "CreateAccount": "Create an Account",
+        "PhoneNumberLable": "Phone Number",
+        "EnterPasswordLabel": "Enter password",
+        "ResetPassword": "Reset Password",
+        "SignInUsingOTP": "Sign In using OTP",
+        "Next": "Next",
+        "AlreadyAccount": "Already have an account?",
+        "resendOTP": "Resend OTP",
+        "CreatePassword": "Create Password",
+        "SetPassword": "Set Password",
+        "goBack": "Go Back",
+        "BasicDetails": "We need some basic details to get started!",
+        "YourCityPincode": "Your City Pincode",
+        "YourDateOfBirth": "Your Date of Birth",
+        "YourFullName": "Your Full Name"
+      },
+      "HomeScreen": {
+        "namaste": "Namaste",
+        "startYourDay": "Start your day with wisdom",
+        "pickUpFrom": "Pick up from where you left off",
+        "recommendedActivity": "Recommended Activity",
+        "recommendedProducts": "Recommended Products",
+        "trendingNearYou": "Trending Near You!",
+        "contentAsYouLikeIt": "Content as you like it",
+        "viewAll": "View All",
+        "events": "Events",
+        "courses": "Courses",
+        "readAll": "Read All"
+      },
+      "AgnihotraScreen": {
+        "startIn": "Start in",
+        "sunset": "Sunset",
+        "agnihotra": "Agnihotra",
+        "pune": "Pune",
+        "play": "Play",
+        "mantra": "Mantra",
+        "how": "How",
+        "toPerform": "To Perform",
+        "get": "Get",
+        "AgnihotraKit": "Agnihotra Kit",
+        "ourGurus": "Our Gurus",
+        "agnihotraEvents": "Agnihotra Events",
+        "courses": "Courses",
+        "stepsToPerform": "Steps to perform"
+      },
+      "FeedsScreen": {
+        "myFeed": "My Feed",
+        "startYourDay": "Start your day with some positive energy!",
+        "trendingVideos": "Trending Videos!",
+        "vastuForHarmony": "Vastu for Harmony",
+        "quickRecipe": "Quick Recipe",
+        "viewAll": "View All",
+        "recommendedForYou": "Recommended for you",
+        "financialBalance": "Financial Balance",
+        "relatedVideos": "Related Videos",
+        "indulgeLearning": "Indulge in the learning",
+        "recommendForYou": "Recommended for you"
+      },
+      "ProductDetails": {
+        "topProduct": "Top Product of the Day",
+        "readArticleBtn": "Read Article",
+        "productCategory": "Product Category",
+        "devices": "Devices",
+        "Appliances": "Appliances",
+        "Travel": "Travel",
+        "Home": "Home",
+        "Kitchen": "Kitchen",
+        "Fashion": "Fashion",
+        "SpiritualProduct": "Spiritual Product",
+        "shopAll": "Shop All",
+        "FamilyGuide": "Family Guide",
+        "off": "off",
+        "orderNow": "Order Now",
+        "TrendingProducts": "Trending Products"
+      },
+      "Components": {
+        "PredictionCard": {
+          "noPanchangAvailable": "No panchang available for today"
+        },
+        "ActivityCard": {
+          "Kcal": "Kcal",
+          "Calories": "Calories",
+          "mins": "mins",
+          "Duration": "Duration"
+        },
+        "ProductCard": {
+          "TopProduct": "Top Product of the Day"
+        },
+        "EventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "CourseCard": {
+          "BtnTitle": "View Courses"
+        },
+        "AgnihotraEventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "DeviceCard": {
+          "readReview": "Read Review"
+        }
+      },
+      "MyProfile": {
+        "edit": "Edit",
+        "personalInfo": "Personal Info",
+        "change": "Change",
+        "password": "Password",
+        "getHelp": "Get Help",
+        "logout": "Logout",
+        "deleteAcc": "Delete Account",
+        "getHelpModal": {
+          "forAnyHelp": "For any help or assistance",
+          "writeToUs": "WRITE TO US",
+          "whatsAppUs": "WHATSAPP US",
+          "close": "CLOSE"
+        },
+        "logoutModal": {
+          "areYouSure": "Are you sure you want to ",
+          "logoutYourAccount": "logout your account?",
+          "goBack": "GO BACK",
+          "yesLogout": "YES, LOGOUT"
+        },
+        "customeModal": {
+          "areYouSure": "Are you sure you want to ",
+          "deleteYourAccount": "delete your account?",
+          "ThisAction": "This action cannot be undone.",
+          "goBack": "GO BACK",
+          "yesDelete": "YES, DELETE"
+        }
+      },
+      "EditInfo": {
+        "uploadSuccess": "Image Upload Successfully.",
+        "upploadFailure": "Image Upload Failed.",
+        "fullNameLabel": "Your full name",
+        "fullNameError": "Please enter full name",
+        "dateOfBirth": "Your date of birth",
+        "pincode": "Your city pincode",
+        "pincodeError": "Please enter pincode",
+        "updateBtn": "Update Details",
+        "oldPass": "Enter old password",
+        "oldPassError": "Please enter old password",
+        "newPass": "Enter new password",
+        "newPassError": "Please enter new password",
+        "reEnterNewPass": "Re-enter new password",
+        "reEnterNewPassError": "Please re-enter new password",
+        "submitBtn": "Submit"
+      },
+      "PanchanngeScreen": {
+        "startYourDay": "Start your day with wisdom"
+      },
+      "EventScreen": {
+        "event": "Event",
+        "upcommingEvent": "Upcomming Events",
+        "registerNow": "Register Now",
+        "eventDetails": "Event Details",
+        "eventDescription": "Event Description",
+        "brochure": "Brochure",
+        "gallary": "Gallary",
+        "sponsors": "Sponsors",
+        "registerBtn": "Register Now for Event"
+      },
+      "TrendingScreen": {
+        "back": "Back",
+        "home": "Home",
+        "buyOn": "Buy on",
+        "ourPick": "Our Pick",
+        "similarFind": "Similar Find",
+        "readReview": "Read Review"
+      },
+      "Courses": {
+        "Courses": "Courses",
+        "Spiritual": "Spiritual",
+        "viewAll": "View All",
+        "Physical": "Physical",
+        "SriM": "Sri M",
+        "Mind": "Mind",
+        "Financial": "Financial",
+        "Teachers": "Teachers",
+        "Lessons": "Lessons",
+        "Mins": "Mins",
+        "Week": "Week",
+        "Videos": "Videos",
+        "mins": "mins",
+        "Tasks": "Tasks",
+        "QuickRecipe": "Quick 30 mins recipe of delicious modak Quick 30 mins recipe of delicious modak"
+      },
+      "ArticleDetails": {
+        "RelatedVideos": "Related Videos",
+        "viewAll": "View All",
+        "IndulgeLearning": "Indulge in the learning",
+        "RecommendedForYou": "Recommended for you"
+      },
+      "MainScreen": {
+        "Home": "Home",
+        "Agnihotra": "Agnihotra",
+        "My Feeds": "My Feeds",
+        "More": "More"
+      }
+    },
+    "mr": {
+      "SignInScreen": {
+        "Welcome": "Welcome",
+        "SignIn": "Sign In",
+        "SignUp": "Sign Up",
+        "otpSent": "We've sent a 6 digit OTP to",
+        "SignInUsingPassword": "Sign In using Password",
+        "or": "OR",
+        "CreateAccount": "Create an Account",
+        "PhoneNumberLable": "Phone Number",
+        "EnterPasswordLabel": "Enter password",
+        "ResetPassword": "Reset Password",
+        "SignInUsingOTP": "Sign In using OTP",
+        "Next": "Next",
+        "AlreadyAccount": "Already have an account?",
+        "resendOTP": "Resend OTP",
+        "CreatePassword": "Create Password",
+        "SetPassword": "Set Password",
+        "goBack": "Go Back",
+        "BasicDetails": "We need some basic details to get started!",
+        "YourCityPincode": "Your City Pincode",
+        "YourDateOfBirth": "Your Date of Birth",
+        "YourFullName": "Your Full Name"
+      },
+      "HomeScreen": {
+        "namaste": "Namaste",
+        "startYourDay": "Start your day with wisdom",
+        "pickUpFrom": "Pick up from where you left off",
+        "recommendedActivity": "Recommended Activity",
+        "recommendedProducts": "Recommended Products",
+        "trendingNearYou": "Trending Near You!",
+        "contentAsYouLikeIt": "Content as you like it",
+        "viewAll": "View All",
+        "events": "Events",
+        "courses": "Courses",
+        "readAll": "Read All"
+      },
+      "AgnihotraScreen": {
+        "startIn": "Start in",
+        "sunset": "Sunset",
+        "agnihotra": "Agnihotra",
+        "pune": "Pune",
+        "play": "Play",
+        "mantra": "Mantra",
+        "how": "How",
+        "toPerform": "To Perform",
+        "get": "Get",
+        "AgnihotraKit": "Agnihotra Kit",
+        "ourGurus": "Our Gurus",
+        "agnihotraEvents": "Agnihotra Events",
+        "courses": "Courses",
+        "stepsToPerform": "Steps to perform"
+      },
+      "FeedsScreen": {
+        "myFeed": "My Feed",
+        "startYourDay": "Start your day with some positive energy!",
+        "trendingVideos": "Trending Videos!",
+        "vastuForHarmony": "Vastu for Harmony",
+        "quickRecipe": "Quick Recipe",
+        "viewAll": "View All",
+        "recommendedForYou": "Recommended for you",
+        "financialBalance": "Financial Balance",
+        "relatedVideos": "Related Videos",
+        "indulgeLearning": "Indulge in the learning",
+        "recommendForYou": "Recommended for you"
+      },
+      "ProductDetails": {
+        "topProduct": "Top Product of the Day",
+        "readArticleBtn": "Read Article",
+        "productCategory": "Product Category",
+        "devices": "Devices",
+        "Appliances": "Appliances",
+        "Travel": "Travel",
+        "Home": "Home",
+        "Kitchen": "Kitchen",
+        "Fashion": "Fashion",
+        "SpiritualProduct": "Spiritual Product",
+        "shopAll": "Shop All",
+        "FamilyGuide": "Family Guide",
+        "off": "off",
+        "orderNow": "Order Now",
+        "TrendingProducts": "Trending Products"
+      },
+      "Components": {
+        "PredictionCard": {
+          "noPanchangAvailable": "No panchang available for today"
+        },
+        "ActivityCard": {
+          "Kcal": "Kcal",
+          "Calories": "Calories",
+          "mins": "mins",
+          "Duration": "Duration"
+        },
+        "ProductCard": {
+          "TopProduct": "Top Product of the Day"
+        },
+        "EventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "CourseCard": {
+          "BtnTitle": "View Courses"
+        },
+        "AgnihotraEventCard": {
+          "BtnTitle": "Register Now"
+        },
+        "DeviceCard": {
+          "readReview": "Read Review"
+        }
+      },
+      "MyProfile": {
+        "edit": "Edit",
+        "personalInfo": "Personal Info",
+        "change": "Change",
+        "password": "Password",
+        "getHelp": "Get Help",
+        "logout": "Logout",
+        "deleteAcc": "Delete Account",
+        "getHelpModal": {
+          "forAnyHelp": "For any help or assistance",
+          "writeToUs": "WRITE TO US",
+          "whatsAppUs": "WHATSAPP US",
+          "close": "CLOSE"
+        },
+        "logoutModal": {
+          "areYouSure": "Are you sure you want to ",
+          "logoutYourAccount": "logout your account?",
+          "goBack": "GO BACK",
+          "yesLogout": "YES, LOGOUT"
+        },
+        "customeModal": {
+          "areYouSure": "Are you sure you want to ",
+          "deleteYourAccount": "delete your account?",
+          "ThisAction": "This action cannot be undone.",
+          "goBack": "GO BACK",
+          "yesDelete": "YES, DELETE"
+        }
+      },
+      "EditInfo": {
+        "uploadSuccess": "Image Upload Successfully.",
+        "upploadFailure": "Image Upload Failed.",
+        "fullNameLabel": "Your full name",
+        "fullNameError": "Please enter full name",
+        "dateOfBirth": "Your date of birth",
+        "pincode": "Your city pincode",
+        "pincodeError": "Please enter pincode",
+        "updateBtn": "Update Details",
+        "oldPass": "Enter old password",
+        "oldPassError": "Please enter old password",
+        "newPass": "Enter new password",
+        "newPassError": "Please enter new password",
+        "reEnterNewPass": "Re-enter new password",
+        "reEnterNewPassError": "Please re-enter new password",
+        "submitBtn": "Submit"
+      },
+      "PanchanngeScreen": {
+        "startYourDay": "Start your day with wisdom"
+      },
+      "EventScreen": {
+        "event": "Event",
+        "upcommingEvent": "Upcomming Events",
+        "registerNow": "Register Now",
+        "eventDetails": "Event Details",
+        "eventDescription": "Event Description",
+        "brochure": "Brochure",
+        "gallary": "Gallary",
+        "sponsors": "Sponsors",
+        "registerBtn": "Register Now for Event"
+      },
+      "TrendingScreen": {
+        "back": "Back",
+        "home": "Home",
+        "buyOn": "Buy on",
+        "ourPick": "Our Pick",
+        "similarFind": "Similar Find",
+        "readReview": "Read Review"
+      },
+      "Courses": {
+        "Courses": "Courses",
+        "Spiritual": "Spiritual",
+        "viewAll": "View All",
+        "Physical": "Physical",
+        "SriM": "Sri M",
+        "Mind": "Mind",
+        "Financial": "Financial",
+        "Teachers": "Teachers",
+        "Lessons": "Lessons",
+        "Mins": "Mins",
+        "Week": "Week",
+        "Videos": "Videos",
+        "mins": "mins",
+        "Tasks": "Tasks",
+        "QuickRecipe": "Quick 30 mins recipe of delicious modak Quick 30 mins recipe of delicious modak"
+      },
+      "ArticleDetails": {
+        "RelatedVideos": "Related Videos",
+        "viewAll": "View All",
+        "IndulgeLearning": "Indulge in the learning",
+        "RecommendedForYou": "Recommended for you"
+      },
+      "MainScreen": {
+        "Home": "Home",
+        "Agnihotra": "Agnihotra",
+        "My Feeds": "My Feeds",
+        "More": "More"
+      }
+    }
+  }
+]

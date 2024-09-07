@@ -11,6 +11,6 @@ router.route("/logout").post(userControls.logoutUser);
 
 router.route("/resetpassword").post(userControls.resetpassword);
 
-router.route("/me").get(authUser, userControls.getUser);
+router.route("/profile").get(authUser, userControls.getUser);
 
 module.exports = router;

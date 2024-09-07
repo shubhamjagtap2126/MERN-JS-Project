@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SiteData } from "../SiteData";
+import { SiteData } from "../features/SiteData";
 
 export default function Footer() {
   // console.log(SiteData.footerLinks[0].text);
